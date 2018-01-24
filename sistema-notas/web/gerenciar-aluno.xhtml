@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml">
+
+    <h:form>
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="Adicionar" action="#{alunoBean.adicionar()}" update="@form"></p:commandButton>
+                <p:commandButton value="Listar" action="#{alunoBean.listar()}" update="@form"></p:commandButton>
+            </p:toolbarGroup>
+        </p:toolbar>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <p:fieldset legend="Objetos">
+            <p:panelGrid columns="2">
+                <h:outputLabel value="Nome"></h:outputLabel>
+                <p:inputText value="#{alunoBean.aluno.nome}"></p:inputText>
+
+                <h:outputLabel value="Sobrenome"></h:outputLabel>
+                <p:inputText value="#{alunoBean.aluno.sobrenome}"></p:inputText>
+
+                <h:outputLabel value="Nota"></h:outputLabel>
+                <p:inputText value="#{alunoBean.aluno.nota}"></p:inputText>
+
+                <h:outputLabel value="Data de Nascimento"></h:outputLabel>
+                <p:calendar value="#{alunoBean.aluno.dataNascimento}" ></p:calendar>
+            </p:panelGrid>
+            <p:dataTable value="#{alunoBean.alunos}" var="aluno">
+                <p:column>
+                    <p:commandButton value="Editar" action="#{alunoBean.editar(aluno)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" action="#{alunoBean.deletar(aluno)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{aluno.nome}">
+                    <h:outputText value="#{aluno.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Sobrenome" sortBy="#{carro.sobrenome}">
+                    <h:outputText value="#{aluno.sobrenome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Nota" sortBy="#{carro.nota}">
+                    <h:outputText value="#{aluno.nota}"></h:outputText>
+                </p:column>
+                <p:column headerText="Data de Nascimento" sortBy="#{carro.dataNascimento}">
+                    <h:outputText value="#{aluno.dataNascimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>
+
